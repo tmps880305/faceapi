@@ -1,0 +1,96 @@
+allprojects {
+    group 'com.oppo'
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+}
+
+
+buildscript {
+    ext {
+        springIOVersion = '1.0.0.RELEASE'
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:${springIOVersion}"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.oppo'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+jar {
+    baseName = 'faceapi'
+    manifest {
+        attributes "Manifest-Version": 1.0,
+                'Main-Class': 'com.oppo.faceapi'
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'org.springframework:spring-core'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework.boot:spring-boot-autoconfigure'
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    //compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.6.2.RELEASE'
+    //compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.8.2.RELEASE'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    //compile "org.springframework.boot:spring-boot-starter-security"
+    //compile group: 'org.springframework.security', name: 'spring-security-core'
+    compile 'com.github.zhanhb:thymeleaf-layout-dialect:2.1.2'
+    compile 'org.webjars:jquery:3.3.1-1'
+    compile 'org.webjars:bootstrap:4.1.1'
+    compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.9.RELEASE'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-core', version: '9.1.6'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-itext5', version: '9.1.6'
+    compile group: 'net.sf.jtidy', name: 'jtidy', version: 'r938'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+    runtime('mysql:mysql-connector-java')
+    runtimeOnly('com.microsoft.sqlserver:mssql-jdbc')
+    compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
+    compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
+
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-core', version: '9.1.6'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-itext5', version: '9.1.6'
+    compile group: 'net.sf.jtidy', name: 'jtidy', version: 'r938'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+    compile group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf', version: '9.0.9'
+    testCompile('junit:junit:4.12')
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.12'
+    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.5.12'
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.51'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.2'
+
+}
